@@ -8,6 +8,7 @@ namespace AdminBeheer.Controllers
 {
     public class ManagementController : Controller
     {
+        // Test
         // GET: Management
         public ActionResult Index()
         {
