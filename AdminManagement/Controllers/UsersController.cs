@@ -149,5 +149,9 @@ namespace AdminManagement.Controllers
         {
             return _context.Users.Any(e => e.ID == id);
         }
+
+        [HttpGet]
+        public async Task<IEnumerable<User>> GetAll()
+            => await _context.Users.ToArrayAsync();
     }
 }
