@@ -17,7 +17,11 @@ namespace AdminManagement.Tests
         public async Task UserTest()
         {
             // Creating the DB context
-            var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+
             var optionsBuilder = new DbContextOptionsBuilder<UserContext>();
             optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
             var context = new UserContext(optionsBuilder.Options);
