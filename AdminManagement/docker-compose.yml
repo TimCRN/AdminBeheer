@@ -1,0 +1,38 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+services:
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+
+  myadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=secret
+
+  webapp:
+    image: adminmanagement
+    depends_on: 
+      - db
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment: 
+      ServerName: "db"
+      Database: ""
+      UserName: "root"
+      Password: "secret"
+    ports:
+      - 80:5000  
+      
