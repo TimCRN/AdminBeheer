@@ -11,10 +11,10 @@ USER appuser
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["AdminManagement.csproj", "./"]
-RUN dotnet restore "AdminManagement.csproj"
+COPY ["AdminManagement/AdminManagement.csproj", "AdminManagement/"]
+RUN dotnet restore "AdminManagement/AdminManagement.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/AdminManagement"
 RUN dotnet build "AdminManagement.csproj" -c Release -o /app/build
 
 FROM build AS publish
