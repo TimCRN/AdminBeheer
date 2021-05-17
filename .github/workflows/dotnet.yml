@@ -41,4 +41,4 @@ jobs:
     - name: Run Tests
       env: 
         ConnectionStrings__DefaultConnection: Server=localhost;Database=AdminManagementDB_Test;User=sa;Password=b&T3Y41sZO8oLsj
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal AdminManagement.sln
