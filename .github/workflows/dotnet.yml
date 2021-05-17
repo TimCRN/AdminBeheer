@@ -33,12 +33,12 @@ jobs:
         time: '5s'
         
     - name: Restore dependencies
-      run: dotnet restore adminmanagement
+      run: dotnet restore AdminManagement.sln
       
     - name: Build Project
-      run: dotnet build --no-restore adminmanagement
+      run: dotnet build --no-restore AdminManagement.sln
       
     - name: Run Tests
       env: 
         ConnectionStrings__DefaultConnection: Server=localhost;Database=AdminManagementDB_Test;User=sa;Password=b&T3Y41sZO8oLsj
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal AdminManagement.sln

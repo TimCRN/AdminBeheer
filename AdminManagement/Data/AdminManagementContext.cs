@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdminManagement.Data
 {
-    public class UserContext : DbContext
+    public class AdminManagementContext : DbContext
     {
-        public UserContext(DbContextOptions<UserContext> options) : base(options)
+        public AdminManagementContext(DbContextOptions<AdminManagementContext> options) : base(options)
         {
         }
 
         public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
-        }
+        }*/
     }
 }

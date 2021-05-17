@@ -6,7 +6,7 @@ namespace AdminManagement.Data
 {
     public static class DbInitializer
     {
-        public static void Initialize(UserContext context)
+        public static void Initialize(AdminManagementContext context)
         {
             context.Database.EnsureCreated();
 

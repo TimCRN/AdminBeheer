@@ -22,9 +22,9 @@ namespace AdminManagement.Tests
                 .AddEnvironmentVariables()
                 .Build();
 
-            var optionsBuilder = new DbContextOptionsBuilder<UserContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<AdminManagementContext>();
             optionsBuilder.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]);
-            var context = new UserContext(optionsBuilder.Options);
+            var context = new AdminManagementContext(optionsBuilder.Options);
 
             // Renew Testing DB
             await context.Database.EnsureDeletedAsync();
