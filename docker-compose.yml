@@ -27,7 +27,7 @@ services:
       - db
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: AdminManagement/Dockerfile
     environment: 
       ServerName: "db"
       Database: ""
