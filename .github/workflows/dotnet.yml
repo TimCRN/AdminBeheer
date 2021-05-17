@@ -33,10 +33,10 @@ jobs:
         time: '5s'
         
     - name: Restore dependencies
-      run: dotnet restore adminmanagement
+      run: dotnet restore AdminManagement.sln
       
     - name: Build Project
-      run: dotnet build --no-restore adminmanagement
+      run: dotnet build --no-restore AdminManagement.sln
       
     - name: Run Tests
       env: 
