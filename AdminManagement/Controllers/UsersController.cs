@@ -12,9 +12,9 @@ namespace AdminManagement.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly UserContext _context;
+        private readonly AdminManagementContext _context;
 
-        public UsersController(UserContext context)
+        public UsersController(AdminManagementContext context)
         {
             _context = context;
         }

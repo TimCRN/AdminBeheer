@@ -29,7 +29,7 @@ namespace AdminManagement
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<UserContext>();
+                    var context = services.GetRequiredService<AdminManagementContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
