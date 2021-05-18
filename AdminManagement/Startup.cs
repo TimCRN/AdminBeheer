@@ -57,8 +57,6 @@ namespace AdminManagement
 
             app.UseAuthorization();
 
-            context.Database.Migrate();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
