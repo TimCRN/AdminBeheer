@@ -34,7 +34,7 @@ namespace AdminManagement.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace AdminManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,LastName,FirstName")] User user)
+        public async Task<IActionResult> Create([Bind("Id,LastName,FirstName")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -86,9 +86,9 @@ namespace AdminManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstName")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LastName,FirstName")] User user)
         {
-            if (id != user.ID)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace AdminManagement.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.ID))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace AdminManagement.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace AdminManagement.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.ID == id);
+            return _context.Users.Any(e => e.Id == id);
         }
 
         [HttpGet]
