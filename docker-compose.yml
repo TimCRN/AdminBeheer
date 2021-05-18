@@ -31,3 +31,5 @@ services:
     build:
       context: .
       dockerfile: AdminManagement/Dockerfile
+    ports:
+      - 8000:80
