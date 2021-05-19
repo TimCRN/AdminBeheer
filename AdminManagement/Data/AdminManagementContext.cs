@@ -10,10 +10,10 @@ namespace AdminManagement.Data
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<InventoryItem> InventoryItems { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Service> Services { get; set; }
 
-        /*protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().ToTable("User");
-        }*/
     }
 }

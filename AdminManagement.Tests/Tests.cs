@@ -30,11 +30,14 @@ namespace AdminManagement.Tests
             await context.Database.EnsureDeletedAsync();
             await context.Database.EnsureCreatedAsync();
 
+            // Ensure a role is available to appoint to
+            context.Roles.Add(new Role { Name = "Test" });
+
             // Creating the Controller
             var controller = new UsersController(context);
 
             // Adding to the DB
-            await controller.Create(new User() { FirstName = "Test", LastName = "Test" });
+            await controller.Create(new User() { FirstName = "Test", LastName = "Test", Email="test@test.com", RoleId=1, PhoneNumber="0123456789" });
 
             // Check if added correctly
             var result = (await controller.GetAll()).ToArray();

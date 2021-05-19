@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AdminManagement.Data;
 using AdminManagement.Models;
+using System.Net.Mail;
+using AdminManagement.ViewModels;
 
 namespace AdminManagement.Controllers
 {
@@ -22,7 +24,7 @@ namespace AdminManagement.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Users.ToListAsync());
+            return View(await _context.Users.Include(u => u.Role).ToListAsync());
         }
 
         // GET: Users/Details/5
@@ -34,7 +36,9 @@ namespace AdminManagement.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (user == null)
             {
                 return NotFound();
@@ -46,6 +50,9 @@ namespace AdminManagement.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            // Fetches the roles that are defined in the DB
+            ViewBag.AvailableRoles = _context.Roles.ToArray();
+
             return View();
         }
 
@@ -54,8 +61,17 @@ namespace AdminManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,LastName,FirstName")] User user)
+        public async Task<IActionResult> Create([Bind("RoleId,LastName,FirstName,Email")] User user)
         {
+            try
+            {
+                new MailAddress(user.Email);
+            }
+            catch
+            {
+                throw new ArgumentException($"'{user.Email}' is not a valid email.");
+            }
+
             if (ModelState.IsValid)
             {
                 _context.Add(user);
@@ -78,6 +94,10 @@ namespace AdminManagement.Controllers
             {
                 return NotFound();
             }
+
+            // Fetches the roles that are defined in the DB
+            ViewBag.AvailableRoles = _context.Roles.ToArray();
+
             return View(user);
         }
 
@@ -86,9 +106,9 @@ namespace AdminManagement.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstName")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,RoleId,LastName,FirstName,Email")] User user)
         {
-            if (id != user.ID)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -102,7 +122,7 @@ namespace AdminManagement.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.ID))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +145,7 @@ namespace AdminManagement.Controllers
             }
 
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -147,7 +167,7 @@ namespace AdminManagement.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.Users.Any(e => e.ID == id);
+            return _context.Users.Any(e => e.Id == id);
         }
 
         [HttpGet]
