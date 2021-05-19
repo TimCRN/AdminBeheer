@@ -1,4 +1,5 @@
-[![.NET](https://github.com/TimCRN/AdminBeheer/actions/workflows/dotnet.yml/badge.svg?branch=master)](https://github.com/TimCRN/AdminBeheer/actions/workflows/dotnet.yml)
+[![Build & Tests](https://github.com/TimCRN/AdminBeheer/actions/workflows/build-test.yml/badge.svg)](https://github.com/TimCRN/AdminBeheer/actions/workflows/build-test.yml)
+[![Docker Publishes](https://github.com/TimCRN/AdminBeheer/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/TimCRN/AdminBeheer/actions/workflows/docker-publish.yml)
 
 # Admin Management
 
