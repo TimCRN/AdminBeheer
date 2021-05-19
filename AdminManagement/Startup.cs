@@ -25,8 +25,9 @@ namespace AdminManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AdminManagementContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("MySqlConnection"), 
+                MySqlServerVersion.LatestSupportedServerVersion));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -34,7 +35,7 @@ namespace AdminManagement
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AdminManagementContext context)
         {
             if (env.IsDevelopment())
             {
