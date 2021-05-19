@@ -14,15 +14,17 @@ namespace AdminManagement.Data
             // Rebuilds and seeds the DB if so.
             if (context.Database.GetPendingMigrations().Any())
             {
+                context.Database.EnsureDeleted();
                 context.Database.Migrate();
 
                 #region Role Definition
 
                 context.Roles.AddRange(new Role[]
                     {
-                        new Role{ Name="Admin" },
+                        new Role{ Name="Guest" },
+                        new Role{ Name="Customer" },
                         new Role{ Name="Employee" },
-                        new Role{ Name="Customer" }
+                        new Role{ Name="Admin" }                        
                     });
                 context.SaveChanges();
 
