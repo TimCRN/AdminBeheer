@@ -1,13 +1,13 @@
-name: .NET
+name: Build & Tests
 
 on:
   push:
     branches:
-    - master
+    - main
     - development
   pull_request:
     branches: 
-    - master
+    - main
     - development
 
 jobs:
