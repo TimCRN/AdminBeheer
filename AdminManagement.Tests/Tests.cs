@@ -50,6 +50,7 @@ namespace AdminManagement.Tests
         [Fact]
         public void ValidUserUnitTest()
         {
+            // Checks if fields in user are not null
             User TestUser = new User() { FirstName = "Test", LastName = "User", Email = "testuser@test.com", RoleId = 1, PhoneNumber = "0123456789" };
             Assert.NotNull(TestUser.FirstName);
             Assert.NotNull(TestUser.LastName);
