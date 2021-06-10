@@ -31,8 +31,9 @@ jobs:
             docker-compose --file docker-compose.test.yml build
             docker-compose --file docker-compose.test.yml run sut
           else
-            docker build . --file AdminManagement/Dockerfile
+            docker build . --file Dockerfile
           fi
+        working-directory: ./AdminManagement
 
   # Push image to GitHub Packages & Docker Hub.
   # See also https://docs.docker.com/docker-hub/builds/
@@ -51,10 +52,11 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2        
 
       - name: Build image
-        run: docker build . --file AdminManagement/Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        working-directory: ./AdminManagement
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
