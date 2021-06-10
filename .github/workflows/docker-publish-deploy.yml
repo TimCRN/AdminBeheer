@@ -101,7 +101,6 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker pull timcrn/adminmanagement:latest
-            docker stop adminmanagement
-            docker rm adminmanagement
-            docker run --name=adminmanagement --restart=always -d timcrn/adminmanagement:latest
+            cd AdminBeheer/
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml pull
+            docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
