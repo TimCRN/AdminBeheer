@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AdminManagement.Data;
-using AdminManagement.Models;
-using System.Net.Mail;
-using AdminManagement.ViewModels;
+﻿// <copyright file="LoginController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AdminManagement.Controllers
 {
+    using AdminManagement.Data;
+    using Microsoft.AspNetCore.Mvc;
+
     public class LoginController : Controller
     {
         private readonly AdminManagementContext _context;
@@ -20,6 +15,7 @@ namespace AdminManagement.Controllers
         {
             _context = context;
         }
+
         public IActionResult Index()
         {
             return View();

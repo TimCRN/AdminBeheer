@@ -1,15 +1,18 @@
-using AdminManagement.Controllers;
-using AdminManagement.Data;
-using AdminManagement.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
+// <copyright file="Tests.cs" company="Zuyd">
+// Copyright (c) Zuyd. All rights reserved.
+// </copyright>
 
 namespace AdminManagement.Tests
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AdminManagement.Controllers;
+    using AdminManagement.Data;
+    using AdminManagement.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Xunit;
+
     public class Tests
     {
         #region Integration Tests
@@ -37,7 +40,7 @@ namespace AdminManagement.Tests
             var controller = new UsersController(context);
 
             // Adding to the DB
-            await controller.Create(new User() { FirstName = "Test", LastName = "Test", Email="test@test.com", RoleId=1, PhoneNumber="0123456789" });
+            await controller.Create(new User() { FirstName = "Test", LastName = "Test", Email = "test@test.com", RoleId = 1, PhoneNumber = "0123456789" });
 
             // Check if added correctly
             var result = (await controller.GetAll()).ToArray();
@@ -51,18 +54,16 @@ namespace AdminManagement.Tests
         public void ValidUserUnitTest()
         {
             // Checks if fields in user are not null
-            User TestUser = new User() { FirstName = "Test", LastName = "User", Email = "testuser@test.com", RoleId = 1, PhoneNumber = "0123456789" };
-            Assert.NotNull(TestUser.FirstName);
-            Assert.NotNull(TestUser.LastName);
-            Assert.NotNull(TestUser.Email);
-            Assert.NotNull(TestUser.PhoneNumber);
-
+            User testUser = new () { FirstName = "Test", LastName = "User", Email = "testuser@test.com", RoleId = 1, PhoneNumber = "0123456789" };
+            Assert.NotNull(testUser.FirstName);
+            Assert.NotNull(testUser.LastName);
+            Assert.NotNull(testUser.Email);
+            Assert.NotNull(testUser.PhoneNumber);
         }
 
         [Fact]
         public void UnitTest2()
         {
-
         }
         #endregion
     }

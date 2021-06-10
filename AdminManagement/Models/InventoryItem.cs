@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="InventoryItem.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AdminManagement.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class InventoryItem
     {
         [Key]
@@ -13,6 +13,7 @@ namespace AdminManagement.Models
 
         [Required]
         public int UserId { get; set; }
+
         public User User { get; set; }
 
         [Required]
@@ -20,6 +21,7 @@ namespace AdminManagement.Models
         public string Name { get; set; }
 
         public int CategoryId { get; set; }
+
         public Category Category { get; set; }
 
         [Required]

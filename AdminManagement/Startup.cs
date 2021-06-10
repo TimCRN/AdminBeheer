@@ -1,18 +1,17 @@
-using AdminManagement.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+// <copyright file="Startup.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AdminManagement
 {
+    using AdminManagement.Data;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -26,8 +25,9 @@ namespace AdminManagement
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AdminManagementContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySqlConnection"), 
-                MySqlServerVersion.LatestSupportedServerVersion));
+                options.UseMySql(
+                    Configuration.GetConnectionString("MySqlConnection"),
+                    MySqlServerVersion.LatestSupportedServerVersion));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -44,9 +44,16 @@ namespace AdminManagement
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            if (context is null)
+            {
+                throw new System.ArgumentNullException(nameof(context));
+            }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
