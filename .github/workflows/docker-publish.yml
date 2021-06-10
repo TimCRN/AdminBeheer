@@ -93,7 +93,7 @@ jobs:
           context: .
           file: AdminManagement/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}.adminmanagement:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/adminmanagement:latest
           
   deploy:
     needs: push
