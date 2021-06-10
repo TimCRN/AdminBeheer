@@ -35,5 +35,9 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          script: ls -l
+          script: |
+            docker pull docker pull timcrn/adminmanagement:latest
+            docker stop adminmanagement
+            docker rm adminmanagement
+            docker run --name=adminmanagement --restart=always
       
