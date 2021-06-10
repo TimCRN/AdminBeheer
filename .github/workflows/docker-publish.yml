@@ -94,3 +94,22 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}.adminmanagement:latest
           
+  deploy:
+    needs: push
+    
+    runs-on: ubuntu-latest
+    
+    environment:
+      name: Production
+      
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Throw SSH Commands
+        uses: appleboy/ssh-action@master
+        with:
+          script: |
+            docker pull timcrn/adminmanagement:latest
+            docker stop adminmanagement
+            docker rm adminmanagement
+            docker run --name=adminmanagement --restart=always
