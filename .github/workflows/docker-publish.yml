@@ -90,7 +90,8 @@ jobs:
       - name: Push 2 Hub        
         uses: docker/build-push-action@v2
         with:
-          context: AdminManagement/
+          context: .
+          file: AdminManagement/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}.adminmanagement:latest
           
