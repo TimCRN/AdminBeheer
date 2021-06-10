@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="User.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AdminManagement.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class User
     {
         [Key]
@@ -13,6 +13,7 @@ namespace AdminManagement.Models
 
         [Required]
         public int RoleId { get; set; }
+
         public Role Role { get; set; }
 
         [Required]
@@ -33,6 +34,5 @@ namespace AdminManagement.Models
         [MaxLength(15)]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
-        
     }
 }

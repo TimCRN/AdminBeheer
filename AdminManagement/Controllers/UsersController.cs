@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AdminManagement.Data;
-using AdminManagement.Models;
-using System.Net.Mail;
-using AdminManagement.ViewModels;
+﻿// <copyright file="UsersController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AdminManagement.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Mail;
+    using System.Threading.Tasks;
+    using AdminManagement.Data;
+    using AdminManagement.Models;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+
     public class UsersController : Controller
     {
         private readonly AdminManagementContext _context;
@@ -65,7 +67,7 @@ namespace AdminManagement.Controllers
         {
             try
             {
-                new MailAddress(user.Email);
+                _ = new MailAddress(user.Email);
             }
             catch
             {
@@ -78,6 +80,7 @@ namespace AdminManagement.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(user);
         }
 
@@ -131,8 +134,10 @@ namespace AdminManagement.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(user);
         }
 
@@ -155,7 +160,8 @@ namespace AdminManagement.Controllers
         }
 
         // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
@@ -165,13 +171,15 @@ namespace AdminManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IEnumerable<User>> GetAll()
+        {
+            return await _context.Users.ToArrayAsync();
+        }
+
         private bool UserExists(int id)
         {
             return _context.Users.Any(e => e.Id == id);
         }
-
-        [HttpGet]
-        public async Task<IEnumerable<User>> GetAll()
-            => await _context.Users.ToArrayAsync();
     }
 }

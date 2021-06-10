@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿// <copyright file="Service.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace AdminManagement.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class Service
     {
         [Key]
@@ -14,6 +14,7 @@ namespace AdminManagement.Models
         // Owner of the service
         [Required]
         public int UserId { get; set; }
+
         public User User { get; set; }
 
         [Required]
