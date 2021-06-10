@@ -80,7 +80,7 @@ jobs:
           context: .
           file: AdminManagement/Dockerfile
           push: true
-          tags: docker.pkg.github.com/${{ github.repository }}/adminmanagement:latest
+          tags: docker.pkg.github.com/timcrn/adminbeheer/adminmanagement:latest
           
   deploy:
     needs: push
