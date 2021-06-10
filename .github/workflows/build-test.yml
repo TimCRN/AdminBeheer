@@ -3,17 +3,19 @@ name: Build & Tests
 on:
   push:
     branches:
-    - main
     - development
+    
   pull_request:
     branches: 
-    - main
     - development
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    environment:
+      name: Development
 
     steps:
     - uses: actions/checkout@v2
@@ -25,7 +27,7 @@ jobs:
         
     - name: Start SQL Server
       run: |
-        docker run -d -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=b&T3Y41sZO8oLsj' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest
+        docker run -d -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=${{ secrets.DB_PASSWORD }}' -e 'MSSQL_PID=Express' -p 1433:1433 -d mcr.microsoft.com/mssql/server:latest
         
     - name: Wait for the SQL Server to Init 🙃
       uses: jakejarvis/wait-action@master
@@ -40,5 +42,5 @@ jobs:
       
     - name: Run Tests
       env: 
-        ConnectionStrings__DefaultConnection: Server=localhost;Database=AdminManagementDB_Test;User=sa;Password=b&T3Y41sZO8oLsj
+        ConnectionStrings__DefaultConnection: Server=localhost; Database=${{ secrets.DB_NAME }}; User=${{ secrets.DB_USER }}; Password=${{ secrets.DB_PASSWORD }}
       run: dotnet test --no-build --verbosity normal AdminManagement.sln
