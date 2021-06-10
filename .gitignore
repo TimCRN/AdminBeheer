@@ -342,3 +342,7 @@ healthchecksdb
 AdminManagement/.vscode/launch.json
 AdminManagement/.vscode/tasks.json
 /.sqldata
+
+# VSCode files
+.vscode/
+/AdminBeheer/.sqldata
