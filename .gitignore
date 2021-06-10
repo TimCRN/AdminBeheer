@@ -346,3 +346,4 @@ AdminManagement/.vscode/tasks.json
 # VSCode files
 .vscode/
 /AdminBeheer/.sqldata
+*.env
