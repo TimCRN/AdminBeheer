@@ -104,4 +104,4 @@ jobs:
             docker pull timcrn/adminmanagement:latest
             docker stop adminmanagement
             docker rm adminmanagement
-            docker run --name=adminmanagement --restart=always
+            docker run --name=adminmanagement --restart=always -d timcrn/adminmanagement:latest
