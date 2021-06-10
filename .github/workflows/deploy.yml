@@ -36,7 +36,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker pull docker pull timcrn/adminmanagement:latest
+            docker pull timcrn/adminmanagement:latest
             docker stop adminmanagement
             docker rm adminmanagement
             docker run --name=adminmanagement --restart=always
