@@ -8,7 +8,7 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["AdminManagement/AdminManagement.csproj", "AdminManagement/"]
+COPY ["./AdminManagement.csproj", "AdminManagement/"]
 RUN dotnet restore "AdminManagement/AdminManagement.csproj"
 COPY . .
 WORKDIR "/src/AdminManagement"
