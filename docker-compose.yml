@@ -14,16 +14,6 @@ services:
     ports:
       - 3306:3306
 
-  myadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - 8080:80
-    environment:
-      PMA_HOST: ${PMA_HOST}
-      PMA_USER: ${PMA_USER}
-      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-
   adminmanagement:
     image: ${DOCKER_REGISTRY-}adminmanagement
     depends_on: 
@@ -32,4 +22,7 @@ services:
       context: .
       dockerfile: AdminManagement/Dockerfile
     ports:
-      - 8000:80
+      - 80:80
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Release
+      - ConnectionStrings__MySqlConnection=server=db;database=${MYSQL_DATABASE};userid=root;pwd=${MYSQL_ROOT_PASSWORD}
