@@ -2,22 +2,22 @@ version: '3.5'
 
 services:
 
+  db:
+    networks:
+      - internal
+    labels:
+      - traefik.enable=false
+
   adminmanagement:
     image: timcrn/adminmanagement:latest
     networks:
       - web
+      - internal
     labels:
-      - traefik.docker.network=traefik_network
-      - traefik.backend=test
+      - traefik.docker.network=web
+      - traefik.backend=adminmanagement
       - traefik.frontend.rule=Host:zuydest.nl
-      - traefik.enable=true
       - traefik.port=80
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Release
-
-  db:
-    networks:
-      - web
 
   reverse-proxy:
     image: traefik:1.7.9
@@ -32,8 +32,10 @@ services:
     networks:
       - web
     labels:
-      - traefik.frontend.rule=Host:dashboard.zuydest.nl
+      - traefik.frontend.rule=Host:traefik.zuydest.nl
       - traefik.port=8081
 networks:
   web:
-    name: traefik_network
+    external: true
+  internal:
+    external: false
