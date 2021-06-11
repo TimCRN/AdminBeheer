@@ -347,3 +347,4 @@ AdminManagement/.vscode/tasks.json
 .vscode/
 /AdminBeheer/.sqldata
 *.env
+/data/grafana

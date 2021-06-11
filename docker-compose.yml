@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 
 services:
 
@@ -21,8 +21,6 @@ services:
     build:
       context: .
       dockerfile: AdminManagement/Dockerfile
-    ports:
-      - 80:80
     environment: 
       - ASPNETCORE_ENVIRONMENT=Release
       - ConnectionStrings__MySqlConnection=server=db;database=${MYSQL_DATABASE};userid=root;pwd=${MYSQL_ROOT_PASSWORD}
