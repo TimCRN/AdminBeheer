@@ -16,11 +16,11 @@ services:
 
   adminmanagement:
     image: ${DOCKER_REGISTRY-}adminmanagement
-    depends_on: 
+    depends_on:
       - db
     build:
       context: .
       dockerfile: AdminManagement/Dockerfile
-    environment: 
+    environment:
       - ASPNETCORE_ENVIRONMENT=Release
       - ConnectionStrings__MySqlConnection=server=db;database=${MYSQL_DATABASE};userid=root;pwd=${MYSQL_ROOT_PASSWORD}

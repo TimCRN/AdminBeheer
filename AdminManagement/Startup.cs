@@ -11,6 +11,10 @@ namespace AdminManagement
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using Microsoft.AspNetCore.DataProtection;
+    using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
+    using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
+    using System.IO;
 
     public class Startup
     {
@@ -26,8 +30,17 @@ namespace AdminManagement
         {
             services.AddDbContext<AdminManagementContext>(options =>
                 options.UseMySql(
-                    Configuration.GetConnectionString("MySqlConnection"),
-                    MySqlServerVersion.LatestSupportedServerVersion));
+                    connectionString: Configuration.GetConnectionString("MySqlConnection"),
+                    serverVersion: MySqlServerVersion.LatestSupportedServerVersion,
+                    mySqlOptionsAction: mySqlOptions =>
+                    {
+                        mySqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 5,
+                            maxRetryDelay: System.TimeSpan.FromSeconds(5),
+                            errorNumbersToAdd: null
+                        );
+                    }
+                ));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -54,7 +67,6 @@ namespace AdminManagement
                 throw new System.ArgumentNullException(nameof(context));
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
