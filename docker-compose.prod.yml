@@ -14,6 +14,7 @@ services:
       - web
       - internal
     labels:
+      - traefik.enable=true
       - traefik.docker.network=web
       - traefik.backend=adminmanagement
       - traefik.frontend.rule=Host:zuydest.nl
@@ -31,9 +32,7 @@ services:
       - /usr/local/traefik/acme.json:/acme.json
     networks:
       - web
-    labels:
-      - traefik.frontend.rule=Host:traefik.zuydest.nl
-      - traefik.port=8081
+
 networks:
   web:
     external: true
